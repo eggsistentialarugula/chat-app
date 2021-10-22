@@ -5,18 +5,19 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 // Set the Background Image
 const backgroundImage = require('../assets/Background-Image.png');
 // Background color options - Green, Blue, Orange, Gray, White
-const bgColors = ['#ade899', '#dcccff', '#8A95A5', '#faffc9'];
+const bgColors = ['#cfdeca', '#dcccff', '#8A95A5', '#faffc9', '#b8e6e4'];
 
 export default class Start extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             name: '',
-            bgColor: '#090C08',
+            bgColor: '#cfdeca',
         }
     }
 
     render(){
+        const setBorder = this.state.bgColor;
         return(
             <View style={styles.container}>
                 <ImageBackground 
@@ -44,6 +45,7 @@ export default class Start extends React.Component {
                                     onPress={() => this.setState({ bgColor: colorSelected })}
                                     style={[
                                         styles.colors(colorSelected),
+                                        setBorder === colorSelected ? styles.borderOfCircle : null,
                                     ]}
                                     />
                                 ))}
@@ -55,8 +57,8 @@ export default class Start extends React.Component {
                                 accessibilityRole="button"
                                 activeOpacity={0.8}
                                 style={styles.chatButton}
-                                onPress={()=>this.props.navigation.navigate('Chat', {name:this.state.name, bgColor: this.state.bgColor})}>
-                                
+                                onPress={()=>this.props.navigation.navigate('Chat', {name:this.state.name, bgColor: this.state.bgColor})}
+                            >
                                 <Text style = {styles.text}>
                                     Start Chatting
                                 </Text>
@@ -137,5 +139,9 @@ const styles = StyleSheet.create({
         marginTop: '4%',
         borderRadius: 2,
     },
+    borderOfCircle:{
+        borderWidth: 2.5,
+        borderColor: '#ffc124',
+    }
 
 })
