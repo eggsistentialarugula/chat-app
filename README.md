@@ -4,7 +4,6 @@
 
 [Overview](#overview) <br/>
 [Description](#description) <br/>
-[Features](#features) <br/>
 [Getting Started](#gettingStarted) <br/>
 [Stack](#stack) <br/>
 [Dependencies](#dependencies) <br/>
@@ -12,7 +11,9 @@
 
 <h3 id = "overview">Overview</h3>
 
-## Quick Start
+<h3 id = "description">Description</h3>
+
+### Quick Start
 
 - Install [Expo](https://expo.io/): `npm install expo-cli -g`
 
@@ -55,8 +56,6 @@ $ expo start
 ```
 Launch Expo app on physical device and scan QR code in the Expo GUI
 
-## Stack, Dependencies, Environment, Hosting
-
 <h3 id = "stack"> Stack </h3>
 
 1. React Native
@@ -92,7 +91,7 @@ Launch Expo app on physical device and scan QR code in the Expo GUI
 
 14. react-navigation-stack
 
-### Environment
+<h3 id = "environment"> Environment</h3>
 
 1. Visual Studio Code v1.53.2
 
@@ -100,5 +99,5 @@ Launch Expo app on physical device and scan QR code in the Expo GUI
 
 3. node v16.4.0
 
-### Hosting/Database
+<h3>Hosting/Database</h3>
 This project uses [Google Firebase/Firestore](https://firebase.google.com/) for data storage.
