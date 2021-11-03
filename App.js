@@ -18,7 +18,7 @@ export default class App extends Component {
           <Stack.Screen
             name="Start"
             component={Start}
-            options={{ title: "Start chatting!" }}
+            options={{ title: "Welcome to YamAlot" }}
           />
           <Stack.Screen
             name="Chat"

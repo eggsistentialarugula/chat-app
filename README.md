@@ -1,3 +1,10 @@
-# Chat App
+# React Native Mobile Chat App
 
-A Chat App for mobile devices using React Native. 
+### Quick Access
+
+[Overview](#overview) <br/>
+[Description](#description) <br/>
+[Features](#features) <br/>
+[Tech](#tech) <br/>
+[Tools used](#built) <br/>
+[Dependencies](#dependencies) <br/>
