@@ -65,6 +65,19 @@ export default class Chat extends React.Component {
     this.authUnsubscribe();
   }
 
+  // load messages from AsyncStorage
+  async getMessages() {
+    let messages = '';
+    try {
+      messages = await AsyncStorage.getItem('messages') || [];
+      this.setState({
+        messages: JSON.parse(messages)
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   // add messages to database
   addMessage() {
     const message = this.state.messages[0];

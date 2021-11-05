@@ -19,7 +19,7 @@ export default class Start extends React.Component {
     _loadFontsAsync = async () => {
         let isLoaded = await Font.loadAsync({
             // MeriendaOne MUST be named as MeriendaOne
-            Righteous: require("../assets/fonts/Righteous-Regular.ttf")
+            MeriendaOne: require("../assets/fonts/MeriendaOne-Regular.ttf")
         })
         this.setState({ loaded: isLoaded });
     }
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 18,
-        fontFamily: 'Righteous',
+        fontFamily: 'MeriendaOne',
         color: '#000',
         paddingLeft: '2%',
     },
