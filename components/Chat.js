@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import NetInfo from '@react-native-community/netinfo';
 import React from 'react';
 import { View, Text, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native';
-import { GiftedChat, Day, Bubble, SystemMessage } from 'react-native-gifted-chat';
+import { GiftedChat, Day, Bubble, SystemMessage, InputToolbar } from 'react-native-gifted-chat';
 // Import the functions you need from the SDKs you need
 const firebase = require('firebase');
 require('firebase/firestore');
@@ -41,21 +41,29 @@ export default class Chat extends React.Component {
     const { name } = this.props.route.params;
     this.props.navigation.setOptions({ title: name });
     // listen to authentication events, Authenticate user with Firebase
-    this.authUnsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      if (!user) {
-        firebase.auth().signInAnonymously();
+    NetInfo.fetch().then(connection => {
+      if (connection.isConnected) {
+        console.log('online');
+
+        this.authUnsubscribe = firebase.auth().onAuthStateChanged((user) => {
+          if (!user) {
+            firebase.auth().signInAnonymously();
+          }
+          // update user state with currently active user data
+          this.setState({
+            user: {
+              _id: user.uid,
+              name: name,
+              avatar: 'https://placeimg.com/140/140/animals',
+            },
+            messages: [],
+          });
+          // listen for collection changes
+          this.unsubscribe = this.referenceChatMessages.orderBy('createdAt', 'desc').onSnapshot(this.onCollectionUpdate);
+        });
+      } else {
+        console.log('offline');
       }
-      // update user state with currently active user data
-      this.setState({
-        user: {
-          _id: user.uid,
-          name: name,
-          avatar: 'https://placeimg.com/140/140/animals',
-        },
-        messages: [],
-      });
-      // listen for collection changes
-      this.unsubscribe = this.referenceChatMessages.orderBy('createdAt', 'desc').onSnapshot(this.onCollectionUpdate);
     });
   }
 
@@ -297,6 +305,18 @@ export default class Chat extends React.Component {
     }
   }
 
+  // don't render input toolbar if offline
+  renderInputToolbar(props) {
+    if (this.state.isConnected === false) {
+    } else {
+      return (
+        <InputToolbar
+          {...props}
+        />
+      )
+    }
+  }
+
   render() {
     let { bgColor } = this.props.route.params;
     return (
@@ -306,6 +326,7 @@ export default class Chat extends React.Component {
             renderSystemMessage={this.renderSystemMessage.bind(this)}
             renderBubble={this.renderBubble.bind(this)}
             renderDay={this.renderDay.bind(this)}
+            renderInputToolbar={this.renderInputToolbar.bind(this)}
             messages={this.state.messages}
             onSend={(messages) => this.onSend(messages)}
             isTyping={true}
