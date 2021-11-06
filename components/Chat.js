@@ -78,6 +78,19 @@ export default class Chat extends React.Component {
     }
   };
 
+  // delete messages from asyncstorage
+  async deleteMessages() {
+    try {
+      await AsyncStorage.removeItem('messages');
+      this.setState({
+        messages: []
+      })
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+
   // add messages to database
   addMessage() {
     const message = this.state.messages[0];
@@ -90,7 +103,7 @@ export default class Chat extends React.Component {
     });
   }
 
-  // save messages to local storage
+  // save messages to asyncstorage
   async saveMessages() {
     try {
       await AsyncStorage.setItem('messages', JSON.stringify(this.state.messages));
@@ -106,7 +119,7 @@ export default class Chat extends React.Component {
     }),
       // call addMessage to save messages to database
       () => {
-        this.addMessage();
+        // this.addMessage();
         // saves current state into asyncStorage
         this.saveMessages();
       }
