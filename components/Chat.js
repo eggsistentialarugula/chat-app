@@ -19,6 +19,7 @@ export default class Chat extends React.Component {
         _id: '',
         name: '',
       },
+      isConnected: false,
     }
     // firebase config details
     const firebaseConfig = {
@@ -44,6 +45,7 @@ export default class Chat extends React.Component {
     NetInfo.fetch().then(connection => {
       if (connection.isConnected) {
         console.log('online');
+        this.setState({ isConnected: true })
 
         this.authUnsubscribe = firebase.auth().onAuthStateChanged((user) => {
           if (!user) {
@@ -63,6 +65,11 @@ export default class Chat extends React.Component {
         });
       } else {
         console.log('offline');
+        this.setState({
+          isConnected: false
+        })
+        // calls messages from offline storage
+        this.getMessages();
       }
     });
   }
@@ -74,7 +81,7 @@ export default class Chat extends React.Component {
     this.authUnsubscribe();
   }
 
-  // load messages from AsyncStorage
+  // load messages when offline
   async getMessages() {
     let messages = '';
     try {
@@ -112,7 +119,7 @@ export default class Chat extends React.Component {
     });
   }
 
-  // save messages to asyncstorage
+  // save messages to local storage to view offline
   async saveMessages() {
     try {
       await AsyncStorage.setItem('messages', JSON.stringify(this.state.messages));
@@ -128,7 +135,7 @@ export default class Chat extends React.Component {
     }),
       // call addMessage to save messages to database
       () => {
-        // this.addMessage();
+        this.addMessage();
         // saves current state into asyncStorage
         this.saveMessages();
       }
