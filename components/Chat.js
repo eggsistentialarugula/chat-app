@@ -1,10 +1,10 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import React from 'react';
 import { View, Text, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native';
 import { GiftedChat, Day, Bubble, SystemMessage } from 'react-native-gifted-chat';
 // Import the functions you need from the SDKs you need
 const firebase = require('firebase');
 require('firebase/firestore');
-
 
 // The applications main chat component that renders the UI
 export default class Chat extends React.Component {
@@ -90,6 +90,15 @@ export default class Chat extends React.Component {
     });
   }
 
+  // save messages to local storage
+  async saveMessages() {
+    try {
+      await AsyncStorage.setItem('messages', JSON.stringify(this.state.messages));
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   // function to send messages
   onSend(messages = []) {
     this.setState(previousState => ({
@@ -98,6 +107,8 @@ export default class Chat extends React.Component {
       // call addMessage to save messages to database
       () => {
         this.addMessage();
+        // saves current state into asyncStorage
+        this.saveMessages();
       }
     );
   }
