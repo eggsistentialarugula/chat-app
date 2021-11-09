@@ -77,27 +77,28 @@ export default class CustomActions extends React.Component {
     // get and send location
     getLocation = async () => {
         try {
-            // Expo asking for permission
-            const { status } = await Permissions.askAsync(Permissions.LOCATION);
+            const { status } =
+                await Location.requestForegroundPermissionsAsync();
             if (status === "granted") {
-                const result = await Location.getCurrentPositionAsync(
-                    {}
-                ).catch((error) => console.log(error));
-                const longitude = JSON.stringify(result.coords.longitude);
-                const altitude = JSON.stringify(result.coords.latitude);
-                if (result) {
+                const grantedResult = await Location.getCurrentPositionAsync().catch(
+                    (err) => console.error(err)
+                );
+                const longitude = JSON.stringify(grantedResult.coords.longitude);
+                const latitude = JSON.stringify(grantedResult.coords.latitude);
+                if (grantedResult) {
                     this.props.onSend({
                         location: {
-                            longitude: result.coords.longitude,
-                            latitude: result.coords.latitude,
+                            longitude: longitude,
+                            latitude: latitude,
                         },
                     });
                 }
             }
-        } catch (error) {
-            console.log(error.message);
+        } catch (err) {
+            console.error(err.message);
         }
     };
+
     render() {
         return (
             <TouchableOpacity
