@@ -361,6 +361,7 @@ export default class Chat extends React.Component {
         />
       );
     }
+    return null;
   }
 
   render() {
