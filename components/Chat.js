@@ -3,6 +3,10 @@ import NetInfo from '@react-native-community/netinfo';
 import React from 'react';
 import { View, Text, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native';
 import { GiftedChat, Day, Bubble, SystemMessage, InputToolbar } from 'react-native-gifted-chat';
+//custom chat ffeatures (sharing images and location)
+import CustomActions from './CustomActions';
+// MapView Component
+import MapView from 'react-native-maps'
 // Import the functions you need from the SDKs you need
 const firebase = require('firebase');
 require('firebase/firestore');
@@ -20,6 +24,8 @@ export default class Chat extends React.Component {
         name: '',
       },
       isConnected: false,
+      image: null,
+      location: null,
     }
     // firebase config details
     const firebaseConfig = {
@@ -70,6 +76,7 @@ export default class Chat extends React.Component {
         })
         // calls messages from offline storage
         this.getMessages();
+        window.alert('You are offline and not allowed to send messages.');
       }
     });
   }
@@ -116,6 +123,8 @@ export default class Chat extends React.Component {
       createdAt: message.createdAt,
       text: message.text || '',
       user: message.user,
+      image: message.image || null,
+      location: message.location || null,
     });
   }
 
@@ -158,6 +167,8 @@ export default class Chat extends React.Component {
           name: data.user.name,
           avatar: data.user.avatar,
         },
+        image: data.image || null,
+        location: data.location || null,
       });
     });
     this.setState({
@@ -324,6 +335,10 @@ export default class Chat extends React.Component {
     }
   }
 
+  renderCustomActions = (props) => {
+    return <CustomActions {...props} />;
+  };
+
   render() {
     let { bgColor } = this.props.route.params;
     return (
@@ -334,6 +349,7 @@ export default class Chat extends React.Component {
             renderBubble={this.renderBubble.bind(this)}
             renderDay={this.renderDay.bind(this)}
             renderInputToolbar={this.renderInputToolbar.bind(this)}
+            renderActions={this.renderCustomActions}
             messages={this.state.messages}
             onSend={(messages) => this.onSend(messages)}
             isTyping={true}

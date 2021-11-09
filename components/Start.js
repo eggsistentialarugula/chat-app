@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Righteous',
         color: '#000',
         paddingLeft: '2%',
+        textAlign: 'center',
     },
     colorPicker: {
         marginTop: '2.5%',
