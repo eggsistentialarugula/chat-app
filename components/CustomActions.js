@@ -34,21 +34,70 @@ export default class CustomActions extends React.Component {
 
     // choose image from image library
     pickImage = async () => {
-        const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
+        // Expo asking for permission
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
         try {
             if (status === "granted") {
-                let result = await ImagePicker.launchImageLibraryAsync({
-                    mediaTypes: 'Images',
-                }).catch(error => console.log(error));
+                // display system UI for choosing an image or a video from the phone's library
+                const grantedResult = await ImagePicker.launchImageLibraryAsync({
+                    mediaTypes: ImagePicker.MediaTypeOptions.Images, // select only images
+                }).catch((error) => console.log(error));
+                //If the process is cancelled
+                if (!grantedResult.cancelled) {
+                    const imageUrl = await this.uploadImageFetch(result.uri);
+                    this.props.onSend({ image: imageUrl });
+                }
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 
-                if (!result.cancelled) {
-                    this.setState({
-                        image: result
+    // take photo with camera
+    takePhoto = async () => {
+        // expo asking for permission
+        const { status } = await ImagePicker.requestCameraPermissionsAsync();
+        try {
+            if (status === "granted") {
+                // display system UI for taking a photo with the camera
+                const grantedResult = await ImagePicker.launchCameraAsync({
+                    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                }).catch((error) => console.log(error));
+
+                if (!grantedResult.cancelled) {
+                    const imageUrl = await this.uploadImageFetch(grantedResult.uri);
+                    this.props.onSend({ image: imageUrl });
+                }
+            }
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
+
+    // get and send location
+    getLocation = async () => {
+        try {
+            // Expo asking for permission
+            const { status } = await Permissions.askAsync(Permissions.LOCATION);
+            if (status === "granted") {
+                const result = await Location.getCurrentPositionAsync(
+                    {}
+                ).catch((error) => console.log(error));
+                const longitude = JSON.stringify(result.coords.longitude);
+                const altitude = JSON.stringify(result.coords.latitude);
+                if (result) {
+                    this.props.onSend({
+                        location: {
+                            longitude: result.coords.longitude,
+                            latitude: result.coords.latitude,
+                        },
                     });
                 }
             }
+        } catch (error) {
+            console.log(error.message);
         }
-    }
+    };
     render() {
         return (
             <TouchableOpacity
