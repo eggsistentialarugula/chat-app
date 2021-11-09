@@ -340,6 +340,14 @@ export default class Chat extends React.Component {
     return <CustomActions {...props} />;
   };
 
+  // render MapView if the message object contains location data
+  renderCustomView(props) {
+    const { currentMessage } = props;
+    if (currentMessage.location) {
+
+    }
+  }
+
   render() {
     let { bgColor } = this.props.route.params;
     return (
@@ -351,6 +359,7 @@ export default class Chat extends React.Component {
             renderDay={this.renderDay.bind(this)}
             renderInputToolbar={this.renderInputToolbar.bind(this)}
             renderActions={this.renderCustomActions}
+            renderCustomView={this.renderCustomView}
             messages={this.state.messages}
             onSend={(messages) => this.onSend(messages)}
             isTyping={true}
