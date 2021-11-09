@@ -4,6 +4,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
+import * as Location from 'expo-location'
 
 export default class CustomActions extends React.Component {
     // display ActionSheet component to add a button that lets users choose whether to take a photo, choose an existing photo, or send their location to their contacts.
