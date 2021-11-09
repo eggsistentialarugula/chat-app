@@ -3,7 +3,7 @@ import NetInfo from '@react-native-community/netinfo';
 import React from 'react';
 import { View, Text, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native';
 import { GiftedChat, Day, Bubble, SystemMessage, InputToolbar } from 'react-native-gifted-chat';
-//custom chat ffeatures (sharing images and location)
+//custom chat features (sharing images and location)
 import CustomActions from './CustomActions';
 // MapView Component
 import MapView from 'react-native-maps'

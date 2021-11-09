@@ -2,8 +2,11 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+import * as Permissions from 'expo-permissions';
+import * as ImagePicker from 'expo-image-picker';
+
 export default class CustomActions extends React.Component {
-    // display ActionSheet
+    // display ActionSheet component to add a button that lets users choose whether to take a photo, choose an existing photo, or send their location to their contacts.
     onActionPress = () => {
         const options = ['Choose From Library', 'Take Picture', 'Send Location', 'Cancel'];
         const cancelButtonIndex = options.length - 1;
@@ -27,6 +30,24 @@ export default class CustomActions extends React.Component {
             },
         );
     };
+
+    // choose image from image library
+    pickImage = async () => {
+        const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
+        try {
+            if (status === "granted") {
+                let result = await ImagePicker.launchImageLibraryAsync({
+                    mediaTypes: 'Images',
+                }).catch(error => console.log(error));
+
+                if (!result.cancelled) {
+                    this.setState({
+                        image: result
+                    });
+                }
+            }
+        }
+    }
     render() {
         return (
             <TouchableOpacity
