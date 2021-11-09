@@ -335,6 +335,7 @@ export default class Chat extends React.Component {
     }
   }
 
+  // render CustomActions to display ActionSheet
   renderCustomActions = (props) => {
     return <CustomActions {...props} />;
   };
