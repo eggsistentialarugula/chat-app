@@ -28,6 +28,8 @@ This app is created using **React Native**, **Expo**, and **Google Firestore Dat
 * The app provdes users with two additional communication features: sending images and location data.
 * Data gets stored online and offline.
 
+* Users can access messages without internet connection / while offline
+
 <h3 id = "tech">Tech</h3>
 
 * Written in React Native 
@@ -35,11 +37,12 @@ This app is created using **React Native**, **Expo**, and **Google Firestore Dat
 * Chat conversations must be stored in Google Firestore Database
 * Authenticates users anonymously via Google Firebase authentication
 * Chat conversations are stored locally
+
 * Lets users pick and send images from their phone's image library
 * lets users take pictures with the device's camera app and send them
 * stores images in Firebase Cloud Storage
 * can read the user's location data
-* The chat interface and functionality is created using the **Gifted Chat Library**
+* The chat interface and functionality is created using the [Gifted Chat Library](https://github.com/FaridSafi/react-native-gifted-chat)
 
 ### Quick Start
 
