@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
@@ -39,22 +40,19 @@ export default class CustomActions extends React.Component {
 
     // choose image from image library
     pickImage = async () => {
-        // Expo asking for permission
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
         try {
-            if (status === "granted") {
-                // display system UI for choosing an image or a video from the phone's library
+            if (status === 'granted') {
                 const grantedResult = await ImagePicker.launchImageLibraryAsync({
-                    mediaTypes: ImagePicker.MediaTypeOptions.Images, // select only images
-                }).catch((error) => console.log(error));
-                //If the process is cancelled
+                    mediaTypes: ImagePicker.MediaTypeOptions.Images, // only images are allowed
+                }).catch((err) => console.log(err));
                 if (!grantedResult.cancelled) {
-                    const imageUrl = await this.uploadImageFetch(result.uri);
+                    const imageUrl = await this.uploadImageFetch(grantedResult.uri);
                     this.props.onSend({ image: imageUrl });
                 }
             }
-        } catch (error) {
-            console.log(error.message);
+        } catch (err) {
+            console.error(err.message);
         }
     };
 
@@ -63,7 +61,7 @@ export default class CustomActions extends React.Component {
         // expo asking for permission
         const { status } = await ImagePicker.requestCameraPermissionsAsync();
         try {
-            if (status === "granted") {
+            if (status === 'granted') {
                 // display system UI for taking a photo with the camera
                 const grantedResult = await ImagePicker.launchCameraAsync({
                     mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -84,7 +82,7 @@ export default class CustomActions extends React.Component {
         try {
             const { status } =
                 await Location.requestForegroundPermissionsAsync();
-            if (status === "granted") {
+            if (status === 'granted') {
                 //request one-time delivery of user's current location
                 const grantedResult = await Location.getCurrentPositionAsync().catch(
                     (err) => console.error(err)
@@ -140,6 +138,9 @@ export default class CustomActions extends React.Component {
     render() {
         return (
             <TouchableOpacity
+                accessible={true}
+                accessibilityLabel="More options"
+                accessibilityHint="Send image from your gallery or send your location"
                 style={[styles.container]}
                 onPress={this.onActionPress}>
                 <View style={[styles.wrapper, this.props.wrapperStyle]}>

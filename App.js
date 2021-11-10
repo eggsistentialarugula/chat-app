@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
+import * as Font from 'expo-font'
 // Import screens for navigation
 import Start from './components/Start';
 import Chat from './components/Chat';
