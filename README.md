@@ -28,7 +28,7 @@ This app is created using **React Native**, **Expo**, and **Google Firestore Dat
 * The app provdes users with two additional communication features: sending images and location data.
 * Data gets stored online and offline.
 
-* Users can access messages without internet connection / while offline so they can reread conversation at any time.
+* Users can access messages without internet connection / while offline so they can reread conversations at any time.
 * Users care share their location with their friends and family
 * App is compatible with a screen reader so that users with visual impairment can engage with a chat interface 
 
