@@ -4,14 +4,33 @@
 
 [Overview](#overview) <br/>
 [Description](#description) <br/>
+[Key Features](#features) <br/>
 [Getting Started](#gettingStarted) <br/>
+[Tech](#tech) <br/>
 [Stack](#stack) <br/>
 [Dependencies](#dependencies) <br/>
 [Environment](#Environment) <br/>
 
 <h3 id = "overview">Overview</h3>
 
+A chat app for mobile devices built with **React Native**. The app provides users with a chat interface and options to share images and their location.
+
 <h3 id = "description">Description</h3>
+
+Phones are extremely popular nowadays. People use their phones for common daily tasks such as shopping, creating to-do lists, communicating with friends, scheduling meetings, and more. That's why companies offer native mobile versions of their web apps, or even skip created a web app entirely.
+
+This app is created using **React Native**, **Expo**, and **Google Firestore Database**.
+
+<h3 id = "features">Key Features</h3>
+
+* A page where users can enter their name and choose a background color for the chat screen before joining the chat.
+* A page displaying the conversation as well as an input field and submit button.
+* The app provdes users with two additional communication features: sending images and location data.
+* Data gets stored online and offline.
+
+<h3 id = "tech">Tech</h3>
+
+
 
 ### Quick Start
 
