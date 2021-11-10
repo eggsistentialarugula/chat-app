@@ -1,6 +1,6 @@
 # React Native Mobile Chat App
 
-| Home Screen | Chat Screen 1 | Chat Screen 2 | Chat Screen 3 |
+| Home Screen | Chat Screen 1 | Chat Screen 2 | Action Sheet |
 | ------------| --------------| --------------| ------------- |
 | <img src = 'imgs/HomeScreen.png' width = '250'>  | <img src = 'imgs/s1.png' width = '250'> | <img src = 'imgs/s2.png' width = '250'> | <img src = 'imgs/s3.png' width = '250'> |
 
