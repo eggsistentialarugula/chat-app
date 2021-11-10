@@ -128,4 +128,5 @@ Launch Expo app on physical device and scan QR code in the Expo GUI
 3. node v16.4.0
 
 <h3>Database</h3>
-This project uses [Google Firebase/Firestore](https://firebase.google.com/) for data storage.
+
+This project uses [Google Firebase/Firestore](https://firebase.google.com/products/storage/) for data storage.
