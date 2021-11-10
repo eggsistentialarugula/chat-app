@@ -1,7 +1,7 @@
 # React Native Mobile Chat App
 
 | Home Screen | Chat Screen 1 |
-| ---------------------------------------------------------------- | ----------------------------------- |
+| ------------| ----------------------------------- |
 | <img src = 'imgs/HomeScreen.png' width = '250'>  | Content Cell  | <img src = 'imgs/s1.png' width = '250'>
 | Content Cell  | Content Cell  |
 
