@@ -30,7 +30,16 @@ This app is created using **React Native**, **Expo**, and **Google Firestore Dat
 
 <h3 id = "tech">Tech</h3>
 
-
+* Written in React Native 
+* Developed using Expo
+* Chat conversations must be stored in Google Firestore Database
+* Authenticates users anonymously via Google Firebase authentication
+* Chat conversations are stored locally
+* Lets users pick and send images from their phone's image library
+* lets users take pictures with the device's camera app and send them
+* stores images in Firebase Cloud Storage
+* can read the user's location data
+* The chat interface and functionality is created using the **Gifted Chat Library**
 
 ### Quick Start
 
