@@ -1,5 +1,10 @@
 # React Native Mobile Chat App
 
+<h3>Demo</h3>
+
+https://user-images.githubusercontent.com/69954816/147399788-83adb559-48cf-4b65-af9a-6b107509d0ae.mp4
+
+
 | Home Screen | Chat Screen 1 | Chat Screen 2 | Action Sheet |
 | ------------| --------------| --------------| ------------- |
 | <img src = 'imgs/HomeScreen.png' width = '250'>  | <img src = 'imgs/s1.png' width = '250'> | <img src = 'imgs/s2.png' width = '250'> | <img src = 'imgs/s3.png' width = '250'> |
